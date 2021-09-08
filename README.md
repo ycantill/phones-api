@@ -24,7 +24,7 @@ DELETE /phones: Delete a phone
 
 - name
 - price
-- imageFileName
+- imageFileName (by default goes with Iphone SE.png value)
 - description
 - manufacturer
 - color
