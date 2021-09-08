@@ -4,9 +4,11 @@ To run the api use the following command: `npm run start`
 
 For develoment environment: `npm run start:dev`
 
-# API
+Also you can mount the docker image using: `docker-compose up`
 
-Server is running on port 2512.
+The application will run on port 2512.
+
+## API
 
 GET /phones: Retrieve all the phones stored
 
@@ -17,3 +19,15 @@ POST /phones: Create a new phone
 PATCH /phones: Modify a phone
 
 DELETE /phones: Delete a phone
+
+## Phone model
+
+- name
+- price
+- imageFileName
+- description
+- manufacturer
+- color
+- screen
+- processor
+- ram

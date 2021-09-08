@@ -3,19 +3,27 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  const { Phone } = res.models;
+router.get(
+  "/",
+  // Emulate waiting time response
+  (req, res, next) => {
+    const time = Math.random() * (5 - 1) + 1;
+    setTimeout(() => next(), time * 1000);
+  },
+  async (req, res) => {
+    const { Phone } = res.models;
 
-  try {
-    const phones = await Phone.findAll();
+    try {
+      const phones = await Phone.findAll();
 
-    res.json(phones);
-  } catch (error) {
-    res.status(500);
-    console.log(error);
-    res.send("Upsss something wrong!");
+      res.json(phones);
+    } catch (error) {
+      res.status(500);
+      console.log(error);
+      res.send("Upsss something wrong!");
+    }
   }
-});
+);
 
 router.get("/:id", async (req, res) => {
   const { PhoneDetail } = res.models;
@@ -23,7 +31,7 @@ router.get("/:id", async (req, res) => {
 
   try {
     const details = await PhoneDetail.findByPk(id, {
-      attributes: { exclude: ['id', 'createdAt', 'updatedAt', 'PhoneId'] }
+      attributes: { exclude: ["id", "createdAt", "updatedAt", "PhoneId"] },
     });
 
     res.json(details || {});
@@ -58,7 +66,7 @@ router.patch("/", async (req, res) => {
   try {
     await Phone.update(body, { where: { id } });
     await PhoneDetail.update(body, { where: { PhoneId: id } });
-  
+
     res.send("Phone modified!");
   } catch (error) {
     console.log(error);

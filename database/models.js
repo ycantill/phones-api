@@ -18,6 +18,7 @@ module.exports = async (db) => {
       imageFileName: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: 'Iphone SE.png'
       },
     },
     {}
