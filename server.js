@@ -18,6 +18,12 @@
   // Retrieve database models
   const models = await getModels(db);
 
+  // Emulate waiting time response
+  app.use((req, res, next) => {
+    const time = Math.random() * (5 - 1) + 1;
+    setTimeout(() => next(), (time * 1000));
+  });
+
   // Passing models through services
   app.use((req, res, next) => {
     res.models = models;
